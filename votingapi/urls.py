@@ -6,6 +6,6 @@ from apicore import votesapis
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('question/', votesapis.question_view, name='question_view')
+    path('questions/', votesapis.question_view, name='question_view')
     
 ]
