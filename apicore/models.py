@@ -21,8 +21,8 @@ class Question(models.Model):
     # def published_not_longage(self):
     #     now = timezone.now()
     #     return now - datetime.timedelta(days=1) <= self.start_date <= now
+    
 #Choice Model
-
 class Choice(models.Model):
     poll_question = models.ForeignKey(Question, on_delete=models.CASCADE)
     poll_question_choice = models.CharField(max_length=255)

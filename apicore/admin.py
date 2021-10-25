@@ -4,13 +4,12 @@ from apicore.models import*
 #Регистрация моделей
 
     
-admin.site.register(Question)
+# admin.site.register(Question)
 admin.site.register(Choice)
 
-
+@admin.register(Question)
 class DateAdmin(admin.ModelAdmin):
-    def get_readonly_fields(self, request, obj=None):
-        if obj:
-            return self.readonly_fields + ('start_date')
-        else:
-            return []
+    # ...
+    readonly_fields = ['start_date']
+    # ...
+# 
