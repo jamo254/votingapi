@@ -1,9 +1,9 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+
 # Модели для опоросов
-
-
+#Question model
 class Question(models.Model):
     poll_question = models.CharField(max_length=255, blank=False)
     title = models.CharField(max_length=255, blank=True)
@@ -21,8 +21,7 @@ class Question(models.Model):
     # def published_not_longage(self):
     #     now = timezone.now()
     #     return now - datetime.timedelta(days=1) <= self.start_date <= now
-
-
+#Choice Model
 
 class Choice(models.Model):
     poll_question = models.ForeignKey(Question, on_delete=models.CASCADE)

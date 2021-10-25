@@ -24,20 +24,15 @@ def question_view(request):
     elif request.method == 'POST':
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
-            # poll_question = serializer.data['poll_question']
-            # title = serializer.data['title']
-            # start_date = serializer.data['start_date']
-            # Question.objects.create(**serializer.validated_data)
             question = serializer.save()
             # return Response("Вопрос создан", status=status.HTTP_201_CREATED)
             return Response(QuestionSerializer(question).data, status=status.HTTP_201_CREATED)
         
     
  #Getting the question details
+ #Получение вопроса для опроса
 @api_view(['GET', 'PATCH', 'DELETE'])  
 def poll_question_details(request, pk):
-    # question = get_list_or_404(Question, pk=id)
-    
     try:
         question = Question.objects.get(pk=pk)
     except Question.DoesNotExist:
@@ -56,7 +51,7 @@ def poll_question_details(request, pk):
          question.delete()
          return Response("Вопрос удален",status=status.HTTP_204_NO_CONTENT)
      
-     
+#Размещение вариантов ответа на вопрос
 @api_view(['POST'])
 def choice_details(request, pk):
     question = Question.objects.get(pk=pk)
@@ -68,7 +63,7 @@ def choice_details(request, pk):
     return  Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
    
-    
+ #Обновление голосов по конкретному вопросу   
 @api_view(['PATCH'])
 def polls_voting(request, pk):
     question = Question.objects.get(pk=pk)
@@ -80,15 +75,7 @@ def polls_voting(request, pk):
         return Response("Voted")
     return  Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#Poll Question Results
-
-# @api_view('[GET]')
-# def poll_question_results(request, pk):
-#     question = Question.objects.get(pk=pk)
-#     serializer = PollQuestionSerializer(question)
-#     return Response(serializer.data)
-
-
+#Получение результатов опросов
 @api_view(['GET'])
 def poll_question_results(request, pk):
     question = get_object_or_404(Question, pk=pk)

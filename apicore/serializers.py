@@ -2,10 +2,7 @@ from rest_framework import serializers
 from .models import Question, Choice
 
 
-
-    
-
-
+#Choice model serialzer - Сериализатор для модели выбора
 class ChoiceSerializer(serializers.Serializer):
     poll_question_choice = serializers.CharField(max_length=255)
     poll_question_choice_id = serializers.IntegerField(read_only=True)
@@ -15,8 +12,8 @@ class ChoiceSerializer(serializers.Serializer):
 
 class VoteSerializer(serializers.Serializer):
     choice_id = serializers.IntegerField()
-#Choice Serializer
 
+#Question  seriazlizer - Сериализатор вопросов
 class QuestionSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(max_length=255)
@@ -24,12 +21,12 @@ class QuestionSerializer(serializers.Serializer):
     start_date = serializers.DateTimeField()
     end_date = serializers.DateTimeField()
     # published_not_longage = serializers.BooleanField(read_only=True)
-    #Create new question
-
+    
+    #Create new question - Создание нового вопроса
     def create(self, validated_data):
         return Question.objects.create(**validated_data)
 
-    #Updating question
+    #Updating question - Обновление модели вопроса
     def update(self, instance, validated_data):
         for key, value in validated_data.items():
             setattr(instance, key, value)
@@ -38,11 +35,12 @@ class QuestionSerializer(serializers.Serializer):
     
     choices = ChoiceSerializer(many=True, read_only=True)
 
-#Choice serializer after the polls
+#Choice serializer after the polls - Выбор сериализатора
 class ChoiceSerializerAfterVotes(ChoiceSerializer):
     votes = serializers.IntegerField(read_only=True)
 
-#Results serializer
+#Results serializer - Сериализатор результатов
+
 class PollQuestionSerializer(QuestionSerializer):
     choices = ChoiceSerializerAfterVotes(many=True, read_only=True)
    
