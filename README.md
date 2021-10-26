@@ -136,6 +136,49 @@ Test results
   }
 ```
 
+### Получение вопроса с ответом
+``` GET Fetching a question with an answer```
+``` http://127.0.0.1:8000/questions/3/ ```
+```javascript
+ {
+     "id": 3,
+     "title": "Tourism",
+     "poll_question": "Which is the best time to visit your town?",
+     "start_date": "2020-11-05T00:00:00Z",
+     "end_date": "2021-10-25T17:50:57.424231Z",
+     "choices": [
+         {
+             "poll_question_choice": "Summer"
+         }
+     ]
+ }
+```
+### Голосование за конкретный вопрос опроса
+``` PATCH Voting for a particular question - Голосование за конкретный вопрос опроса```
+
+```javascript
+  {
+     "choice_id": 19
+ }
+```
+
+### Просмотр результатов конкретного вопроса опроса
+``` GET Getting Polls results of a particular question - Просмотр результатов конкретного вопроса опроса```
+```javascript
+  {
+    "id": 3,
+    "title": "Tourism",
+    "poll_question": "Which is the best time to visit your town?",
+    "start_date": "2020-11-05T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+        {
+            "poll_question_choice": "Summer",
+            "votes": 0
+        }
+    ]
+}
+```
 
 
 
