@@ -28,6 +28,6 @@
 Test results
 
 ### Создание вопроса для опроса
- ``` python POST create_question ```
+ ```POST create_question ```
 
 
