@@ -28,7 +28,10 @@
 Test results
 
 ### Создание вопроса для опроса
- ```POST create_question ```
+ ```POST create_question  - Создание вопрос опроса```
+ 
+ ```http://127.0.0.1:8000/questions/``
+ 
 ```javascript
   {
     "title": "Food",
