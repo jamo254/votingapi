@@ -40,3 +40,22 @@ Test results
     "end_date": "2021-10-25T17:50:57.424231Z"
   }
  ```
+ #### Ошибка создания вопроса
+ ```javascript
+  {
+     "title": [
+         "This field is required."
+     ],
+     "poll_question": [
+         "This field is required."
+     ],
+     "start_date": [
+         "This field is required."
+     ],
+     "end_date": [
+         "This field is required."
+     ]
+ }
+  ```
+  ### Получение деталей вопроса
+  ```GET Fetching Questions - Получение деталей вопроса```
