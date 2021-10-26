@@ -127,7 +127,18 @@ Test results
 ```http://127.0.0.1:8000/questions/4/```
 ##### Ответ
 ```javascript 
-"Вопрос удален"```
+"Вопрос удален"
+
+### Размещение выбора для конкретного вопроса
+```POST Posting a choice to a question - Размещение выбора для конкретного вопроса```
+```http://127.0.0.1:8000/questions/2/choices/```
+``` javascript
+  {
+      "poll_question_choice": "July"
+  }
+```
+
+
 
 
 
