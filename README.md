@@ -96,7 +96,7 @@ Test results
   
    ]
    ```
-   #### Фильтрация вопросов по идентификатору (id)
+   ### Фильтрация вопросов по идентификатору (id)
    ```GET Fetch Questions by ID - Фильтрация вопросов по идентификатору ```
    ```http://127.0.0.1:8000/questions/3/ ```
    ```javascript
@@ -113,4 +113,21 @@ Test results
      ]
  }
 ```
-#### 
+### Обновление Вопрос
+```PATCH Editing a question - Обновление Вопрос```
+``` javascript
+  {
+      "title": "Travel",
+      "poll_question": "Which country would you like to visit?"
+  }
+
+```
+### Удаление вопросов опроса
+```DEL Deleting a question - удаление вопрос```
+```http://127.0.0.1:8000/questions/4/```
+##### Ответ
+```javascript 
+"Вопрос удален" ```
+
+
+
