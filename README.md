@@ -59,3 +59,58 @@ Test results
   ```
   ### Получение деталей вопроса
   ```GET Fetching Questions - Получение деталей вопроса```
+  ```http://127.0.0.1:8000/questions/ ```
+  
+   ```javascript
+    [
+  {
+    "id": 2,
+    "title": "Countries",
+    "poll_question": "What is the capital of Japan?",
+    "start_date": "2020-10-21T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+      {
+        "poll_question_choice": "RnB"
+      },
+      {
+        "poll_question_choice": "RnB"
+      },
+      {
+        "poll_question_choice": "RnB"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Tourism",
+    "poll_question": "Which is the best time to visit your town?",
+    "start_date": "2020-11-05T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+      {
+        "poll_question_choice": "Summer"
+      }
+    ]
+  }
+  
+   ]
+   ```
+   #### Фильтрация вопросов по идентификатору (id)
+   ```GET Fetch Questions by ID - Фильтрация вопросов по идентификатору ```
+   ```http://127.0.0.1:8000/questions/3/ ```
+   ```javascript
+    {
+     "id": 3,
+     "title": "Tourism",
+     "poll_question": "Which is the best time to visit your town?",
+     "start_date": "2020-11-05T00:00:00Z",
+     "end_date": "2021-10-25T17:50:57.424231Z",
+     "choices": [
+         {
+             "poll_question_choice": "Summer"
+         }
+     ]
+ }
+```
+#### 
