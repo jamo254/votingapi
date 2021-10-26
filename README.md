@@ -29,5 +29,11 @@ Test results
 
 ### Создание вопроса для опроса
  ```POST create_question ```
-
-
+```javascript
+  {
+    "title": "Food",
+    "poll_question": "What is your favorite food?",
+    "start_date": "2020-10-21T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z"
+  }
+ ```
