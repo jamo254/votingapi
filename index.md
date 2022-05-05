@@ -1,37 +1,185 @@
-## Welcome to GitHub Pages
+# REST API для системы голосования
 
-You can use the [editor on GitHub](https://github.com/jamo254/votingapi/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Как работает API:
+ 
+ ## API позволяет:
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+   - Создание, обновление и удаление вопросов опроса;
+   - Получение деталей вопроса
+   - Фильтрация вопросов по идентификатору
+   - Создание выбора для конкретного вопроса
+   - Просмотр вопроса со всеми доступными вариантами
+   - Голосование по конкретному вопросу
+   - Просмотр результатов конкретного вопроса опроса
 
-### Markdown
+## Инструкции по локальному развертыванию приложения
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Клонируйте этот репозиторий или загрузите Zip-файл проекта
+2. Создайте виртуальную среду «Виртуальную среду» с именем «votingevn», которая будет работать с определенной версией python:
+   - python3 -m venv votingenv 
+   - как только виртуальная среда будет создана, перейдите в папку и активируйте виртуальную среду:  source votingevn/bin/activate
+3. Откройте приложение с помощью редактора кода
+   - Запустите сервер, используя следующую команду: python manage.py runserver
+   - Вы можете получить доступ к панели администратора(admin), используя следующий URL-адрес http://127.0.0.1:8000/admin/
 
-```markdown
-Syntax highlighted code block
+# Tестирования API
+  - Можно тестировать API с помощью Postman, Swagger, Python shell или любых других инструментов.
 
-# Header 1
-## Header 2
-### Header 3
+Test results
 
-- Bulleted
-- List
+### Создание вопроса для опроса
+ ```POST create_question  - Создание вопрос опроса```
+ 
+ ```http://127.0.0.1:8000/questions/```
+ 
+```javascript
+  {
+    "title": "Food",
+    "poll_question": "What is your favorite food?",
+    "start_date": "2020-10-21T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z"
+  }
+ ```
+ #### Ошибка создания вопроса
+ ```javascript
+  {
+     "title": [
+         "This field is required."
+     ],
+     "poll_question": [
+         "This field is required."
+     ],
+     "start_date": [
+         "This field is required."
+     ],
+     "end_date": [
+         "This field is required."
+     ]
+ }
+  ```
+  ### Получение деталей вопроса
+  ```GET Fetching Questions - Получение деталей вопроса```
+  ```http://127.0.0.1:8000/questions/ ```
+  
+   ```javascript
+    [
+  {
+    "id": 2,
+    "title": "Countries",
+    "poll_question": "What is the capital of Japan?",
+    "start_date": "2020-10-21T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+      {
+        "poll_question_choice": "RnB"
+      },
+      {
+        "poll_question_choice": "RnB"
+      },
+      {
+        "poll_question_choice": "RnB"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Tourism",
+    "poll_question": "Which is the best time to visit your town?",
+    "start_date": "2020-11-05T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+      {
+        "poll_question_choice": "Summer"
+      }
+    ]
+  }
+  
+   ]
+   ```
+   ### Фильтрация вопросов по идентификатору (id)
+   ```GET Fetch Questions by ID - Фильтрация вопросов по идентификатору ```
+   ```http://127.0.0.1:8000/questions/3/ ```
+   ```javascript
+    {
+     "id": 3,
+     "title": "Tourism",
+     "poll_question": "Which is the best time to visit your town?",
+     "start_date": "2020-11-05T00:00:00Z",
+     "end_date": "2021-10-25T17:50:57.424231Z",
+     "choices": [
+         {
+             "poll_question_choice": "Summer"
+         }
+     ]
+ }
+```
+### Обновление Вопрос
+```PATCH Editing a question - Обновление Вопрос```
+``` javascript
+  {
+      "title": "Travel",
+      "poll_question": "Which country would you like to visit?"
+  }
 
-1. Numbered
-2. List
+```
+### Удаление вопросов опроса
+```DEL Deleting a question - удаление вопрос```
+```http://127.0.0.1:8000/questions/4/```
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
+### Размещение выбора для конкретного вопроса
+```POST Posting a choice to a question - Размещение выбора для конкретного вопроса```
+```http://127.0.0.1:8000/questions/2/choices/```
+```javascript
+  {
+      "poll_question_choice": "July"
+  }
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### Получение вопроса с ответом
+``` GET Fetching a question with an answer```
+``` http://127.0.0.1:8000/questions/3/ ```
+```javascript
+ {
+     "id": 3,
+     "title": "Tourism",
+     "poll_question": "Which is the best time to visit your town?",
+     "start_date": "2020-11-05T00:00:00Z",
+     "end_date": "2021-10-25T17:50:57.424231Z",
+     "choices": [
+         {
+             "poll_question_choice": "Summer"
+         }
+     ]
+ }
+```
+### Голосование за конкретный вопрос опроса
+``` PATCH Voting for a particular question - Голосование за конкретный вопрос опроса```
 
-### Jekyll Themes
+```javascript
+  {
+     "choice_id": 19
+ }
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jamo254/votingapi/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Просмотр результатов конкретного вопроса опроса
+``` GET Getting Polls results of a particular question - Просмотр результатов конкретного вопроса опроса```
+```javascript
+  {
+    "id": 3,
+    "title": "Tourism",
+    "poll_question": "Which is the best time to visit your town?",
+    "start_date": "2020-11-05T00:00:00Z",
+    "end_date": "2021-10-25T17:50:57.424231Z",
+    "choices": [
+        {
+            "poll_question_choice": "Summer",
+            "votes": 0
+        }
+    ]
+}
+```
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+
